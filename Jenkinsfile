@@ -5,6 +5,9 @@ pipeline{
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '1', numToKeepStr: '2')
     }
+    environment{
+        dockerhub=credentails('dockerhub')
+    }
     stages{
         stage('code checkout'){
             steps{
