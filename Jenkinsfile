@@ -6,7 +6,7 @@ pipeline{
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '1', numToKeepStr: '2')
     }
     environment{
-        dockerhub=credentails('dockerhub')
+        dockerhub=credentials('dockerhub')
     }
     stages{
         stage('code checkout'){
