@@ -9,7 +9,7 @@ pipeline{
     stages{
         stage('code checkout'){
             steps{
-                sh 'sudo yum, install git -y'
+                sh 'sudo yum install git -y'
                 checkout changelog: false, poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/choudharyaniruddhacert-bit/python-project-jenkins.git']])
             }
         }
