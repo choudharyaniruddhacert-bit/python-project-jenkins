@@ -2,14 +2,14 @@ pipeline{
     agent {
         label 'python-project-jenkins'
     }
-    cleanWs()
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '1', numToKeepStr: '2')
     }
     stages{
         stage('code checkout'){
             steps{
-                
+                sh 'sudo yum install git -y'
+                sh 'git --version'
                 checkout changelog: false, poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/choudharyaniruddhacert-bit/python-project-jenkins.git']])
             }
         }
