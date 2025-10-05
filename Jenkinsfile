@@ -8,7 +8,7 @@ pipeline{
     stages{
         stage('code checkout'){
             steps{
-                sh 'sudo yum install git -y'
+                // sh 'sudo yum install git -y'
                 sh 'git --version'
                 checkout changelog: false, poll: false, scm: scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/choudharyaniruddhacert-bit/python-project-jenkins.git']])
             }
@@ -16,7 +16,7 @@ pipeline{
         stage('build'){
             steps{
                 sh 'sudo yum install pip -y'
-                sh 'pip install -r -requirements.txt'
+                sh 'pip install -r requirements.txt'
             }
         }
         stage('docker install'){
