@@ -1,6 +1,6 @@
 pipeline{
     agent {
-        label 'python-project-jenkins'
+        label 'python'
     }
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '1', numToKeepStr: '2')
