@@ -7,6 +7,7 @@ pipeline{
     }
     environment{
         dockerhub=credentials('dockerhub')
+        awscred=credentials('awscred')
     }
     stages{
         stage('code checkout'){
@@ -40,6 +41,26 @@ pipeline{
             steps{
                 sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin'
                 sh 'docker push aniruddhaprojectes/python-project-jenkins:latest'
+            }
+        }
+        stage('aws connection check'){
+            steps{
+                sh 'aws --version'
+            }
+        }
+        stage('kubernetes connection check'){
+            steps{
+                sh 'kubectl version --client'
+                sh 'aws eks --region us-east-2 update-kubeconfig --name java-project-eks-cluster'
+                sh 'kubectl config current-context'
+                sh 'kubectl version'
+            }
+        }
+        stage('deploy to kubernetes'){
+            steps{
+                sh 'kubectl apply -f Application.yaml'
+                sh 'sleep 30'
+                sh 'kubectl get pods -o wide'
             }
         }
 
